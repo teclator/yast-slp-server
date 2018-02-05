@@ -17,7 +17,7 @@
 
 
 Name:           yast2-slp-server
-Version:        3.1.5
+Version:        4.0.0
 Release:        0
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -28,10 +28,8 @@ License:        GPL-2.0+
 BuildRequires:	update-desktop-files yast2 yast2-testsuite
 BuildRequires:  yast2-devtools >= 3.1.10
 
-# network needs Wizard::OpenCancelOKDialog()
-#  function from yast2-2.18.2
-# Wizard::SetDesktopTitleAndIcon
-Requires:       yast2 >= 2.21.22
+# SuSEFirewall2 replaced by firewalld (fate#323460)
+Requires:       yast2 >= 4.0.39
 
 BuildArchitectures:	noarch
 
