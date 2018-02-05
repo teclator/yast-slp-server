@@ -10,6 +10,7 @@
 # Representation of the configuration of slp-server.
 # Input and output routines.
 require "yast"
+require "y2firewall/firewalld"
 
 module Yast
   class SlpServerClass < Module
@@ -21,7 +22,6 @@ module Yast
       Yast.import "Summary"
       Yast.import "Message"
       Yast.import "Service"
-      Yast.import "SuSEFirewall"
       Yast.import "Package"
       Yast.import "Popup"
       Yast.import "Confirm"
@@ -238,9 +238,7 @@ module Yast
       return false if false
       Builtins.sleep(sl)
 
-      Progress.set(false)
-      SuSEFirewall.Read
-      Progress.set(true)
+      Y2Firewall::Firewalld.instance.read
 
       # read database
       #    if(Abort()) return false;
@@ -304,9 +302,7 @@ module Yast
         ""
       )
 
-      Progress.set(false)
-      SuSEFirewall.Write
-      Progress.set(true)
+      Y2Firewall::Firewalld.instance.write
 
       Progress.NextStage
       # Error message

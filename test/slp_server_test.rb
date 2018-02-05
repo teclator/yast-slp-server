@@ -1,6 +1,7 @@
 #!/usr/bin/env rspec
 
 require_relative "test_helper"
+require "y2firewall/firewalld"
 
 Yast.import "SlpServer"
 
@@ -18,7 +19,7 @@ describe Yast::SlpServer do
       allow(Yast::Confirm).to receive(:MustBeRoot).and_return(as_root)
       allow(Yast::Progress).to receive(:NextStage)
       allow(Yast::NetworkService).to receive(:RunningNetworkPopup).and_return(true)
-      allow(Yast::SuSEFirewall).to receive(:Read)
+      allow_any_instance_of(Y2Firewall::Firewalld).to receive(:read)
       allow(slp_server).to receive(:installed_packages).and_return(installed_packages)
     end
 
